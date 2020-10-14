@@ -42,14 +42,14 @@
 					obj.id += 1
 					obj.point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.9), ne.lat - latSpan * (Math.random() * 0.9))
 					this.markers.push(obj)
-					// 将点添加到地图上
 					let marker = new BMap.Marker(obj.point);
+					// 将点添加到地图上
 					setTimeout(() => {	// 异步操作解决页面渲染时候卡顿
             this.bmap.addOverlay(marker);
 					})
 					// this.addMarker(obj.point);
 				}
-			},
+      },
 
 			// 获取落在多边形内的定点坐标   绘制完成多边形后的监听事件
       polygonComplete (ply) {
@@ -83,17 +83,22 @@
 					_.bmap.centerAndZoom(point, 15)
           _.bmap.enableScrollWheelZoom()
           _.bmap.clearOverlays()
-          _.bmap.addControl(new BMap.NavigationControl({
-						anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-						type: BMAP_NAVIGATION_CONTROL_ZOOM
-          	})
-					)
-          _.bmap.addEventListener("tilesloaded",function(){  // 监听地图加载完成后，初始化绘制工具栏
-            // _.initDrawingManager()
+
+          // _.bmap.addControl(new BMap.NavigationControl({
+					// 	anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+					// 	type: BMAP_NAVIGATION_CONTROL_ZOOM
+          // 	})
+          // )
+          try {
+            _.bmap.addEventListener("tilesloaded",function(){  // 监听地图加载完成后，初始化绘制工具栏
+            _.initDrawingManager()
 					});
+          } catch (error) {
+            console.log(error);
+          }
+
         })
       },
-
 
       initDrawingManager () { // 初始化地图绘制工具,需要在第一次开启绘制时再初始化,如果随着页面加载一起初始化会报错
         if (!this.drawingManager) {

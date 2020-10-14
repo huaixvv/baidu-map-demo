@@ -1,3 +1,4 @@
+
 const ak = 'DGvGryGb1ZiwParBgwyAWNCCzimDrCPC'
 
 function loadBaiDuMap () {
@@ -29,15 +30,17 @@ function loadBaiDuDrawMap () {
     if (!loaded) {
       console.log('BMapLib.DrawingManager loading!')
 
+
       let script = document.createElement('script')
       script.type = 'text/javascript'
-      script.src = 'http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js'
+      script.src = 'DrawingManager_min.js'
       document.head.appendChild(script)
 
       let link = document.createElement('link')
       link.rel = 'stylesheet'
       link.href = 'http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css'
       document.head.appendChild(link)
+
 
       // 计算覆盖物的工具类
       let script2 = document.createElement('script')
